@@ -69,7 +69,7 @@ app.MapPost("/api/auth/login", async (HttpContext context, AuthService authServi
             new Claim(ClaimTypes.Name, username),
         };
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-        var principal = new ClaimsPrincipal(identity);
+        var principal = new ClaimsPrincipal(identity); 
 
         await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
         context.Response.Redirect("/insurance-form");
