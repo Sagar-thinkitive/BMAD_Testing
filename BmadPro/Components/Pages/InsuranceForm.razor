@@ -1,0 +1,104 @@
+@page "/insurance-form"
+@rendermode InteractiveServer
+@attribute [Authorize]
+@using BmadPro.Models
+@using BmadPro.Services
+@inject InsuranceFormStateService FormState
+@inject NavigationManager Navigation
+
+<PageTitle>Insurance Form - BmadPro</PageTitle>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body p-4">
+                    <h3 class="card-title text-center mb-4">Insurance Application Form</h3>
+
+                    <EditForm Model="@formModel" OnValidSubmit="HandleValidSubmit">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary class="text-danger mb-3" />
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <InputText id="firstName" class="form-control" @bind-Value="formModel.FirstName" />
+                                <ValidationMessage For="@(() => formModel.FirstName)" class="text-danger" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <InputText id="lastName" class="form-control" @bind-Value="formModel.LastName" />
+                                <ValidationMessage For="@(() => formModel.LastName)" class="text-danger" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="dateOfBirth" class="form-label">Date of Birth</label>
+                                <InputDate id="dateOfBirth" class="form-control" @bind-Value="formModel.DateOfBirth" />
+                                <ValidationMessage For="@(() => formModel.DateOfBirth)" class="text-danger" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <InputText id="email" class="form-control" type="email" @bind-Value="formModel.Email" />
+                                <ValidationMessage For="@(() => formModel.Email)" class="text-danger" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="phoneNumber" class="form-label">Phone Number</label>
+                                <InputText id="phoneNumber" class="form-control" type="tel" @bind-Value="formModel.PhoneNumber" />
+                                <ValidationMessage For="@(() => formModel.PhoneNumber)" class="text-danger" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="policyType" class="form-label">Policy Type</label>
+                                <InputSelect id="policyType" class="form-select" @bind-Value="formModel.PolicyType">
+                                    <option value="">-- Select Policy Type --</option>
+                                    <option value="Health Insurance">Health Insurance</option>
+                                    <option value="Life Insurance">Life Insurance</option>
+                                    <option value="Auto Insurance">Auto Insurance</option>
+                                    <option value="Home Insurance">Home Insurance</option>
+                                </InputSelect>
+                                <ValidationMessage For="@(() => formModel.PolicyType)" class="text-danger" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <InputText id="address" class="form-control" @bind-Value="formModel.Address" />
+                            <ValidationMessage For="@(() => formModel.Address)" class="text-danger" />
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="coverageAmount" class="form-label">Coverage Amount</label>
+                                <InputText id="coverageAmount" class="form-control" @bind-Value="formModel.CoverageAmount" />
+                                <ValidationMessage For="@(() => formModel.CoverageAmount)" class="text-danger" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="nomineeName" class="form-label">Nominee Name</label>
+                                <InputText id="nomineeName" class="form-control" @bind-Value="formModel.NomineeName" />
+                                <ValidationMessage For="@(() => formModel.NomineeName)" class="text-danger" />
+                            </div>
+                        </div>
+
+                        <button type="submit" id="submitButton" class="btn btn-primary w-100 mt-2">
+                            Submit Application
+                        </button>
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private InsuranceFormModel formModel = new();
+
+    private void HandleValidSubmit()
+    {
+        FormState.SetFormData(formModel);
+        Navigation.NavigateTo("/form-submitted");
+    }
+}

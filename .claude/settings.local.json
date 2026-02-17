@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx bmad-method:*)",
+      "WebSearch",
+      "Bash(if not exist \"C:\\\\BmadPro\\\\_bmad-output\\\\implementation-artifacts\" mkdir \"C:\\\\BmadPro\\\\_bmad-output\\\\implementation-artifacts\")",
+      "Bash(dotnet new:*)",
+      "Bash(dotnet add package:*)",
+      "Bash(dotnet build:*)",
+      "WebFetch(domain:www.elementsofcomputerscience.com)",
+      "Bash(dotnet sln:*)",
+      "WebFetch(domain:docs.elsaworkflows.io)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:elsa-workflows.github.io)",
+      "WebFetch(domain:v3.elsaworkflows.io)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:www.nuget.org)",
+      "Bash(pwsh:*)",
+      "Bash(powershell:*)",
+      "WebFetch(domain:playwright.dev)",
+      "WebFetch(domain:www.lambdatest.com)"
+    ]
+  }
+}

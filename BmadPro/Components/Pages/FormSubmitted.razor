@@ -1,0 +1,55 @@
+@page "/form-submitted"
+@rendermode InteractiveServer
+@attribute [Authorize]
+@using BmadPro.Models
+@using BmadPro.Services
+@inject InsuranceFormStateService FormState
+@inject NavigationManager Navigation
+
+<PageTitle>Form Submitted - BmadPro</PageTitle>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body p-4">
+                    @if (FormState.FormData is not null)
+                    {
+                        <div class="text-center mb-4">
+                            <h3 class="text-success">Application Submitted Successfully!</h3>
+                            <p class="text-muted">Your insurance application has been received.</p>
+                        </div>
+
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr><th>First Name</th><td id="confirmFirstName">@FormState.FormData.FirstName</td></tr>
+                                <tr><th>Last Name</th><td id="confirmLastName">@FormState.FormData.LastName</td></tr>
+                                <tr><th>Date of Birth</th><td id="confirmDateOfBirth">@FormState.FormData.DateOfBirth?.ToString("yyyy-MM-dd")</td></tr>
+                                <tr><th>Email</th><td id="confirmEmail">@FormState.FormData.Email</td></tr>
+                                <tr><th>Phone Number</th><td id="confirmPhoneNumber">@FormState.FormData.PhoneNumber</td></tr>
+                                <tr><th>Address</th><td id="confirmAddress">@FormState.FormData.Address</td></tr>
+                                <tr><th>Policy Type</th><td id="confirmPolicyType">@FormState.FormData.PolicyType</td></tr>
+                                <tr><th>Coverage Amount</th><td id="confirmCoverageAmount">@FormState.FormData.CoverageAmount</td></tr>
+                                <tr><th>Nominee Name</th><td id="confirmNomineeName">@FormState.FormData.NomineeName</td></tr>
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p class="text-muted text-center">No form data available. Redirecting...</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        if (FormState.FormData is null)
+        {
+            Navigation.NavigateTo("/insurance-form");
+        }
+    }
+}
