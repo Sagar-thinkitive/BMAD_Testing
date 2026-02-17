@@ -63,7 +63,7 @@ app.MapPost("/api/auth/login", async (HttpContext context, AuthService authServi
     var password = form["password"].ToString();
 
     if (authService.ValidateCredentials(username, password))
-    {
+    { 
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, username),
