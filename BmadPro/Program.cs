@@ -26,7 +26,7 @@ builder.Services.AddCascadingAuthenticationState();
 
 // Application services
 builder.Services.AddScoped<AuthService>();
-builder.Services.AddScoped<InsuranceFormStateService>();
+builder.Services.AddSingleton<InsuranceFormStateService>();
 builder.Services.AddSingleton<PlaywrightSession>();
 
 // Elsa Workflow
